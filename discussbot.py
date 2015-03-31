@@ -7,9 +7,14 @@ from praw import Reddit
 from json import loads
 
 #Load configuration file.
-config_file = open('config.json', 'r')
-config = loads(config_file.read())
-config_file.close()
+try:
+    config_file = open('config.json', 'r')
+    config = loads(config_file.read())
+    config_file.close()
+
+except FileNotFoundError:
+    print('[Error]: config.json not found, make sure to edit and rename sample_config.json')
+    exit()
 
 #Get json root titles.
 show = config['shows'][argv[1]]
@@ -19,7 +24,6 @@ templates = config['templates']
 #Get settings.
 version = settings['version']
 user_agent = settings['user_agent'].format(version=version)
-google_oauth = settings['google_oauth']
 loop_int = settings['loop_time']
 refresh_int = settings['refresh_time']
 

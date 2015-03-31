@@ -1,0 +1,29 @@
+{
+    "settings": {
+        "version": "0.8",
+        "user_agent": "discusshelper v{version} - Episode Discussion Helper.",
+        "loop_time": 1,
+        "refresh_time": 2000,
+        "client_id": "reddit app client_id here",
+        "client_secret": "reddit_app client_secret here",
+        "redirect_uri": "http://127.0.0.1:65010/authorize_callback" },
+
+    "templates": {
+        "thread": "Welcome to the {full_name} #{episode} discussion thread.\n\n___\n[{video_title}](https://www.youtube.com/watch?v={video_id})\n\n___\nThe purpose of this thread is so you guys can link and discuss with each other on parts of the show you enjoyed.\n\nLeave well mannered feedback.",
+        "comment": "Bot here! [I posted a discussion thread for this episode here.]({link})",
+        "title": "{show_code} Episode {episode} Discussion"},
+    
+    "shows": {
+        "show1": {
+            "full_name": "Show 1",
+            "subreddit": "show1_subreddit",
+            "youtube_id": "youtube channel_id recommended, username also works.",
+            "reddit_token": "refresh token for reddit account generated with reddit app details from settings" },
+
+        "show2": {
+            "full_name": "Show 2",
+            "subreddit": "show2_subreddit",
+            "youtube_id": "youtube channel_id recommended, username also works.",
+            "reddit_token": "refresh token for reddit account generated with reddit app details from settings" }
+            }
+}
