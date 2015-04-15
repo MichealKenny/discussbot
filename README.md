@@ -1,8 +1,9 @@
-discussbot v1.2 - Youtube video discussion bot for Reddit.
+discussbot v1.2 - Youtube video discussion bot for Reddit. ![db_logo](http://i.imgur.com/xZT8qDb.png?1)
 ===
----
 
-![db_logo](http://i.imgur.com/xZT8qDb.png)
+If you're a podcaster or you moderate a subreddit for a podcast, discussbot can help you out. Everytime an episode of the podcast is uploaded to Youtube, discussbot will post an episode discussion thread to reddit, and if it hasn't been done already, submit a link to the episode as well.
+
+discussbot is really fast, I feel confident in saying it is the fastest Youtube video bot on Reddit, it can post a video within 3 seconds of it being published to Youtube, that's 50x faster than even our closest competitor.
 
 Requirements
 ===
