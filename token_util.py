@@ -14,7 +14,7 @@ except FileNotFoundError:
     exit()
 
 settings = config['settings']
-version = settings['version']
+version = '0.9'
 user_agent = settings['user_agent'].format(version=version)
 
 #Load instance of Reddit.

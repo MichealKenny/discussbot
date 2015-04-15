@@ -1,6 +1,5 @@
 {
     "settings": {
-        "version": "0.8",
         "user_agent": "discusshelper v{version} - Episode Discussion Helper.",
         "loop_time": 1,
         "refresh_time": 2000,
