@@ -1,4 +1,4 @@
-discussbot v1.2 - Youtube video discussion bot for Reddit.
+discussbot v1.4 - Youtube video discussion bot for Reddit.
 ===
 
 If you're a podcaster or you moderate a subreddit for a podcast, discussbot can help you out. Everytime an episode of the podcast is uploaded to Youtube, discussbot will post an episode discussion thread to reddit, and if it hasn't been done already, submit a link to the episode as well.
