@@ -6,6 +6,10 @@ from time import time, sleep
 from requests import get
 from praw import Reddit
 from json import loads
+import logging
+
+#Logging configuration.
+logging.basicConfig(filename='errors.log', format='%(asctime)s: %(message)s')
 
 #Load configuration file.
 try:
@@ -23,7 +27,7 @@ settings = config['settings']
 templates = config['templates']
 
 #Get settings.
-version = '1.2'
+version = '1.4'
 user_agent = settings['user_agent'].format(version=version)
 loop_int = settings['loop_time']
 refresh_int = settings['refresh_time']
@@ -72,6 +76,7 @@ while True:
         video_id = latest.get('href').strip('/watch?v=')
 
     except:
+        logging.warning('Error with Youtube API.')
         sleep(loop_int); continue
 
     #If the given episode number is in the latest video title.
@@ -93,9 +98,16 @@ while True:
             print('Submitted.')
 
         except:
-            #If it failed, get another access token and wait 10 seconds.
-            reddit.refresh_access_information(reddit_oauth)
-            sleep(10)
+            authenticated = False
+            while not authenticated:
+                try:
+                    reddit.refresh_access_information(reddit_oauth)
+                    refresh_time = time()
+                    authenticated = True
+
+                except:
+                    sleep(5); pass
+
             continue
 
         #Load comment for video thread.
@@ -116,6 +128,8 @@ while True:
             print('Already Submitted.')
             #Get the latest 5 submissions on the shows subreddit.
             subreddit_new = reddit.get_subreddit(subreddit).get_new(limit=5)
+            reddit_comment = 'Bot here! Looks like you beat me, that means either you are a fellow bot or you have an impeccable hairline, ' \
+                             'either way, [I posted a discussion thread for this episode here.]({link})'.format(link=dthread_permalink)
 
             #For each thread, check if the video has already been linked too.
             for thread in subreddit_new:
@@ -142,8 +156,15 @@ while True:
 
     #Refresh reddit token every 30 minutes.
     if time() - refresh_time > refresh_int:
-        reddit.refresh_access_information(reddit_oauth)
-        refresh_time = time()
+        authenticated = False
+        while not authenticated:
+            try:
+                reddit.refresh_access_information(reddit_oauth)
+                refresh_time = time()
+                authenticated = True
+
+            except:
+                sleep(5); pass
 
     #Wait given period.
     sleep(loop_int)
