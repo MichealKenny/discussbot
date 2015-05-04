@@ -73,7 +73,7 @@ while True:
         latest = soup.find_all('a', attrs=bs4_attrs)[0]
 
         video_title = latest.string
-        video_id = latest.get('href').strip('/watch?v=')
+        video_id = latest.get('href').replace('/watch?v=', '')
 
     except:
         logging.warning('Error with Youtube API.')
