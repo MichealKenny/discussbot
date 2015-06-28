@@ -27,7 +27,7 @@ settings = config['settings']
 templates = config['templates']
 
 #Get settings.
-version = '1.4'
+version = '1.5'
 user_agent = settings['user_agent'].format(version=version)
 loop_int = settings['loop_time']
 refresh_int = settings['refresh_time']
@@ -92,7 +92,7 @@ while True:
             #Try to post the discussion thread to Reddit.
             print('Available.')
             print('Posting to Reddit..', end='\t'); stdout.flush()
-            dthread_permalink = reddit.submit(subreddit, submission_title, text=text_body)
+            dthread_permalink = reddit.submit(subreddit, submission_title, text=text_body).permalink
 
             time_discussion = str(round(time() - time_found, 1))
             print('Submitted.')
@@ -116,20 +116,19 @@ while True:
         try:
             #If the video has not been linked to, add a link to the video.
             print('Adding link..', end='\t\t'); stdout.flush()
-            vthread_permalink = reddit.submit(subreddit, video_title, url='https://youtube.com/watch?v=' + video_id)
+            vthread_permalink = reddit.submit(subreddit, video_title, url='https://youtube.com/watch?v=' + video_id).permalink
             time_link = str(round(time() - time_found, 1))
             print('Submitted.')
 
             #Then add a comment to our own video link.
-            link = reddit.get_submission(vthread_permalink[:4]+vthread_permalink[5:])
+            link = reddit.get_submission(vthread_permalink)
             link_added = True
 
         except AlreadySubmitted:
             print('Already Submitted.')
             #Get the latest 5 submissions on the shows subreddit.
             subreddit_new = reddit.get_subreddit(subreddit).get_new(limit=5)
-            reddit_comment = 'Bot here! Looks like you beat me, that means either you are a fellow bot or you have an impeccable hairline, ' \
-                             'either way, [I posted a discussion thread for this episode here.]({link})'.format(link=dthread_permalink)
+            reddit_comment = templates['alt_comment'].format(link=dthread_permalink)
 
             #For each thread, check if the video has already been linked too.
             for thread in subreddit_new:

@@ -10,6 +10,7 @@
     "templates": {
         "thread": "Welcome to the {full_name} #{episode} discussion thread.\n\n___\n[{video_title}](https://www.youtube.com/watch?v={video_id})\n\n___\nThe purpose of this thread is so you guys can link and discuss with each other on parts of the show you enjoyed.\n\nLeave well mannered feedback.",
         "comment": "Bot here! [I posted a discussion thread for this episode here.]({link})",
+        "alt_comment": "Bot here! Looks like you beat me, [I posted a discussion thread for this episode here.]({link})",
         "title": "{show_code} Episode {episode} Discussion"},
     
     "shows": {
